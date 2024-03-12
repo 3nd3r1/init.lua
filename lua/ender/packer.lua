@@ -39,6 +39,7 @@ use {
     end
 }
 use('rcarriga/nvim-notify')
+
 use {
   'VonHeikemen/lsp-zero.nvim',
   branch = 'v3.x',
@@ -55,9 +56,13 @@ use {
     {'hrsh7th/cmp-nvim-lsp'},
     {'L3MON4D3/LuaSnip'},
 
+    -- formatting
+   'stevearc/conform.nvim',
+
     -- copilot
     'github/copilot.vim',
   }
 }
+use('lambdalisue/suda.vim')
 
 end)
