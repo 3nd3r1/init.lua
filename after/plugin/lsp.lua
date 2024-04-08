@@ -42,6 +42,17 @@ require('mason-lspconfig').setup({
             local lua_opts = lsp.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
+        helm_ls = function()
+            require('lspconfig').helm_ls.setup({
+                settings = {
+                    ['helm-ls'] = {
+                        yamlls = {
+                            path = "yaml-language-server",
+                        }
+                    }
+                }
+            })
+        end,
     }
 })
 
