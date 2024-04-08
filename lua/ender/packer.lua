@@ -51,6 +51,8 @@ use {
 
     -- LSP Support
     {'neovim/nvim-lspconfig'},
+    {'towolf/vim-helm', ft = 'helm'},
+
     -- Autocompletion
     {'hrsh7th/nvim-cmp'},
     {'hrsh7th/cmp-nvim-lsp'},
@@ -61,6 +63,7 @@ use {
 
     -- copilot
     'github/copilot.vim',
+
   }
 }
 use('lambdalisue/suda.vim')
