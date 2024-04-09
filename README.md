@@ -16,3 +16,7 @@
      ```
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
     ```
+- Install yaml-language-server
+    ```
+    npm install --global yaml-language-server
+    ```
