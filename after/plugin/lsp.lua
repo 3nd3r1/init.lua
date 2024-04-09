@@ -24,6 +24,9 @@ lsp.on_attach(function(client, bufnr)
     -- to learn the available actions
     client.server_capabilities.semanticTokensProvider = nil;
     lsp.default_keymaps({ buffer = bufnr });
+    if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+      vim.diagnostic.disable() 
+    end
 end)
 
 require('mason').setup({})
