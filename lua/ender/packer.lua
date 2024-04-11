@@ -4,11 +4,12 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
+
 -- Packer can manage itself
 use 'wbthomason/packer.nvim'
 
 use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+    'nvim-telescope/telescope.nvim', tag = '0.1.6',
     -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
 }
@@ -22,11 +23,13 @@ use {
 --    end
 -- })
 
-use('nvim-treesitter/nvim-treesitter', {run =':TSUpdate'})
 use('theprimeagen/harpoon')
 use('mbbill/undotree')
 use('tpope/vim-fugitive')
+use('rcarriga/nvim-notify')
 use('nvim-tree/nvim-web-devicons')
+use('lambdalisue/suda.vim')
+
 use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -38,7 +41,9 @@ use {
         require'alpha'.setup(require'alpha.themes.startify'.config)
     end
 }
-use('rcarriga/nvim-notify')
+
+-- LSP STUFF -----------------------------------------------------------------------------------------------------
+use('nvim-treesitter/nvim-treesitter', {run =':TSUpdate'})
 
 use {
   'VonHeikemen/lsp-zero.nvim',
@@ -66,6 +71,5 @@ use {
 
   }
 }
-use('lambdalisue/suda.vim')
 
 end)
