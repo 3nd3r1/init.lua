@@ -67,6 +67,7 @@ conform.setup({
 		python = { "isort", "black" },
 		javascript = { { "prettierd", "prettier" } },
 		typescript = { { "prettierd", "prettier" } },
+		typescriptreact = { { "prettierd", "prettier" } },
 		html = { { "prettierd", "prettier" } },
 		yaml = { { "prettierd", "prettier" } },
 	},
