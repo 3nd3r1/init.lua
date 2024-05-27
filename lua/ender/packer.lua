@@ -41,6 +41,7 @@ return require("packer").startup(function(use)
 			require("alpha").setup(require("alpha.themes.startify").config)
 		end,
 	})
+	use("f-person/git-blame.nvim")
 
 	-- LSP STUFF -----------------------------------------------------------------------------------------------------
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
