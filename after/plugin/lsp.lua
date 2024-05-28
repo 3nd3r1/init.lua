@@ -38,7 +38,7 @@ require("mason-lspconfig").setup({
 		"html",
 		"yamlls",
 		"helm_ls",
-        "bashls",
+		"bashls",
 	},
 	handlers = {
 		lsp.default_setup,
@@ -62,6 +62,7 @@ require("mason-lspconfig").setup({
 
 -- Formatter
 local conform = require("conform")
+
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -71,5 +72,12 @@ conform.setup({
 		typescriptreact = { { "prettierd", "prettier" } },
 		html = { { "prettierd", "prettier" } },
 		yaml = { { "prettierd", "prettier" } },
+	},
+	formatters = {
+		dockfmt = {
+			inherit = false,
+			command = "/usr/local/bin/dockfmt",
+			args = { "fmt", "$FILENAME" },
+		},
 	},
 })
