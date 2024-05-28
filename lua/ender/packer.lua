@@ -42,6 +42,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("f-person/git-blame.nvim")
+	use("stevearc/oil.nvim")
 
 	-- LSP STUFF -----------------------------------------------------------------------------------------------------
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
