@@ -39,6 +39,7 @@ require("mason-lspconfig").setup({
 		"yamlls",
 		"helm_ls",
 		"bashls",
+        "gopls",
 	},
 	handlers = {
 		lsp.default_setup,
