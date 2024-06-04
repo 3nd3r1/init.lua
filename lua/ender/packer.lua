@@ -44,6 +44,8 @@ return require("packer").startup(function(use)
 	use("f-person/git-blame.nvim")
 	use("stevearc/oil.nvim")
 
+	use("folke/which-key.nvim")
+
 	-- LSP STUFF -----------------------------------------------------------------------------------------------------
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 
