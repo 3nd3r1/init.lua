@@ -1,7 +1,16 @@
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Find files"})
-vim.keymap.set("n", "<leader>pg", builtin.git_files, { desc = "Find git files"})
-vim.keymap.set("n", "<leader>ps", function()
-	builtin.live_grep({ additional_args = { "--hidden" } })
-end, { desc = "Live grep" })
-vim.keymap.set("n", "<leader>pt", builtin.treesitter, { desc = "Treesitter find" })
+
+require("which-key").register({
+	p = {
+		name = "Telescope",
+		f = { builtin.find_files, "Find files" },
+		g = { builtin.git_files, "Find git files" },
+		t = { builtin.treesitter, "Treesitter find" },
+		s = {
+			function()
+				builtin.live_grep({ additional_args = { "--hidden" } })
+			end,
+			"Live grep",
+		},
+	},
+}, { prefix = "<leader>" })

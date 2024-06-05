@@ -2,16 +2,16 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
+-- Completions
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
-
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		-- `Enter` key to confirm completion
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<Tab>"] = cmp.mapping.confirm({ select = true }),
 
 		-- Ctrl+Space to trigger completion menu
-		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-c>"] = cmp.mapping.complete(),
 
 		-- Navigate between completions
 		["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.select }),
@@ -19,29 +19,35 @@ cmp.setup({
 	}),
 })
 
+-- LSP
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
 	client.server_capabilities.semanticTokensProvider = nil
-    local opts = { buffer = bufnr }
-    vim.keymap.set('n', '<leader>lK', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-    vim.keymap.set('n', '<leader>lD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-    vim.keymap.set('n', '<leader>li', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-    vim.keymap.set('n', '<leader>lo', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-    vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-    vim.keymap.set('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-    vim.keymap.set('n', '<leader>l<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set('n', '<leader>l<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+	require("which-key").register({
+		l = {
+			name = "LSP",
+			K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover information" },
+			d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
+			D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to declaration" },
+			i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to implementation" },
+			o = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Go to type definition" },
+			r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Show references" },
+			s = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
+			["<F2>"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename symbol" },
+			["<F4>"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
+			l = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Show diagnostics" },
+			["]"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Go to previous diagnostic" },
+			["["] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Go to next diagnostic" },
+		},
+	}, { prefix = "<leader>", buffer = bufnr })
 
-    vim.keymap.set('n', '<leader>ll', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-    vim.keymap.set('n', '<leader>l[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', opts)
-    vim.keymap.set('n', '<leader>l]d', '<cmd>lua vim.diagnostic.goto_next()<cr>', opts)
 	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
 		vim.diagnostic.enable(false)
 	end
 end)
 
+-- Mason
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
@@ -74,6 +80,15 @@ require("mason-lspconfig").setup({
 	},
 })
 
+-- Copilot
+
+vim.keymap.set("i", "<C-Space>", 'copilot#Accept("\\<CR>")', {
+	expr = true,
+	replace_keycodes = false,
+	desc = "Accept Copilot completion",
+})
+vim.g.copilot_no_tab_map = true
+
 -- Formatter
 local conform = require("conform")
 
@@ -95,3 +110,7 @@ conform.setup({
 		},
 	},
 })
+
+require("which-key").register({
+    f = { "<cmd>lua require('conform').format()<cr>", "Format code" },
+}, { prefix = "<leader>" })

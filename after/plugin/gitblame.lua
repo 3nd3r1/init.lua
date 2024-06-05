@@ -4,4 +4,9 @@ gitblame.setup({
 	enabled = false,
 })
 
-vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", {remap=false})
+require("which-key").register({
+	g = {
+		name = "Git",
+		b = { gitblame.toggle, "Toggle Git Blame" },
+	},
+}, { prefix = "<leader>" })
