@@ -4,14 +4,21 @@ lsp.preset("recommended")
 
 -- Linting
 require("lint").linters_by_ft = {
-    python = { "flake8", "pylint" },
-    yaml = { "yamllint" },
+	python = { "flake8", "pylint" },
+	yaml = { "yamllint" },
 }
 require("mason-nvim-lint").setup()
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	callback = function()
+		require("lint").try_lint()
+	end,
+})
 
 -- Completions
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
+
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		-- `Enter` key to confirm completion
@@ -49,11 +56,10 @@ lsp.on_attach(function(client, bufnr)
 		},
 	}, { prefix = "<leader>", buffer = bufnr })
 
-    require("lint").try_lint()
 	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
 		vim.diagnostic.enable(false)
-    else
-        vim.diagnostic.enable(true)
+	else
+		vim.diagnostic.enable(true)
 	end
 end)
 
@@ -122,5 +128,5 @@ conform.setup({
 })
 
 require("which-key").register({
-    f = { "<cmd>lua require('conform').format()<cr>", "Format code" },
+	f = { "<cmd>lua require('conform').format()<cr>", "Format code" },
 }, { prefix = "<leader>" })
