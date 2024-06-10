@@ -62,6 +62,10 @@ return require("packer").startup(function(use)
 			{ "neovim/nvim-lspconfig" },
 			{ "towolf/vim-helm", ft = "helm" },
 
+			-- Linting
+			{ "mfussenegger/nvim-lint" },
+			{ "rshkarin/mason-nvim-lint" },
+
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lsp" },

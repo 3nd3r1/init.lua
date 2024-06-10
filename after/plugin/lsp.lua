@@ -2,6 +2,13 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
+-- Linting
+require("lint").linters_by_ft = {
+    python = { "flake8", "pylint" },
+    yaml = { "yamllint" },
+}
+require("mason-nvim-lint").setup()
+
 -- Completions
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
@@ -42,8 +49,11 @@ lsp.on_attach(function(client, bufnr)
 		},
 	}, { prefix = "<leader>", buffer = bufnr })
 
+    require("lint").try_lint()
 	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
 		vim.diagnostic.enable(false)
+    else
+        vim.diagnostic.enable(true)
 	end
 end)
 
