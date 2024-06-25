@@ -118,6 +118,7 @@ conform.setup({
 		typescriptreact = { { "prettierd", "prettier" } },
 		html = { { "prettierd", "prettier" } },
 		yaml = { { "prettierd", "prettier" } },
+        robot = { "robotidy" },
 	},
 	formatters = {
 		dockfmt = {
@@ -125,6 +126,11 @@ conform.setup({
 			command = "/usr/local/bin/dockfmt",
 			args = { "fmt", "$FILENAME" },
 		},
+        robotidy = {
+            inherit = false,
+            command = "$HOME/.local/bin/robotidy",
+            args = { "$FILENAME" },
+        },
 	},
 })
 
