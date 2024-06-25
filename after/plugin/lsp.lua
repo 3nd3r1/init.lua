@@ -130,16 +130,13 @@ conform.setup({
 			inherit = false,
 			command = "robotidy",
 			args = function()
-                local fp=io.open("$HOME/.robotidy.yaml","r")
-                if fp~=nil then
-                    io.close(fp)
-                    return { "--config", "$HOME/.robotidy.toml", "$FILENAME", "--overwrite" }
-                else
-                    return { "$FILENAME", "--overwrite" }
-                end
-            end,
-			range_args = function(self, ctx)
-				return { "--startline", ctx.range.start[1], "--endline", ctx.range["end"][1] }
+				local fp = io.open(os.getenv("HOME") .. "/.robotidy.toml", "r")
+				if fp ~= nil then
+					io.close(fp)
+					return { "--config", os.getenv("HOME") .. "/.robotidy.toml", "$FILENAME", "--overwrite" }
+				else
+					return { "$FILENAME", "--overwrite" }
+				end
 			end,
 			stdin = false,
 		},
