@@ -129,5 +129,5 @@ conform.setup({
 })
 
 require("which-key").register({
-	f = { "<cmd>lua require('conform').format()<cr>", "Format code" },
+	f = { "<cmd>lua require('conform').format({lsp_format='fallback'})<cr>", "Format code" },
 }, { prefix = "<leader>" })
