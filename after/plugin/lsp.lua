@@ -128,7 +128,7 @@ conform.setup({
 		},
         robotidy = {
             inherit = false,
-            command = "$HOME/.local/bin/robotidy",
+            command = "robotidy",
             args = { "$FILENAME" },
         },
 	},
