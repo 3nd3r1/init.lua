@@ -129,7 +129,8 @@ conform.setup({
         robotidy = {
             inherit = false,
             command = "robotidy",
-            args = { "$FILENAME" },
+            args = { "$FILENAME", "--overwrite" },
+            stdin = false,
         },
 	},
 })
