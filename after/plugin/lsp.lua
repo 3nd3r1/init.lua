@@ -129,7 +129,18 @@ conform.setup({
 		robotidy = {
 			inherit = false,
 			command = "robotidy",
-			args = { "$FILENAME", "--overwrite" },
+			args = function()
+                local fp=io.open("$HOME/.robotidy.yaml","r")
+                if fp~=nil then
+                    io.close(fp)
+                    return { "--config", "$HOME/.robotidy.yaml", "$FILENAME", "--overwrite" }
+                else
+                    return { "$FILENAME", "--overwrite" }
+                end
+            end,
+			range_args = function(self, ctx)
+				return { "--startline", ctx.range.start[1], "--endline", ctx.range["end"][1] }
+			end,
 			stdin = false,
 		},
 	},
