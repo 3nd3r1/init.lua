@@ -118,7 +118,7 @@ conform.setup({
 		typescriptreact = { { "prettierd", "prettier" } },
 		html = { { "prettierd", "prettier" } },
 		yaml = { { "prettierd", "prettier" } },
-        robot = { "robotidy" },
+		robot = { "robotidy" },
 	},
 	formatters = {
 		dockfmt = {
@@ -126,15 +126,33 @@ conform.setup({
 			command = "/usr/local/bin/dockfmt",
 			args = { "fmt", "$FILENAME" },
 		},
-        robotidy = {
-            inherit = false,
-            command = "robotidy",
-            args = { "$FILENAME", "--overwrite" },
-            stdin = false,
-        },
+		robotidy = {
+			inherit = false,
+			command = "robotidy",
+			args = { "$FILENAME", "--overwrite" },
+			stdin = false,
+		},
 	},
 })
 
 require("which-key").register({
-	f = { "<cmd>lua require('conform').format({lsp_format='fallback'})<cr>", "Format code" },
-}, { prefix = "<leader>" })
+	f = {
+		function()
+			conform.format({
+				lsp_format = "fallback",
+			})
+		end,
+		"Format code",
+	},
+}, { prefix = "<leader>", mode = "n" })
+
+require("which-key").register({
+	f = {
+		function()
+			conform.format({
+				lsp_format = "fallback",
+			})
+		end,
+		"Format code",
+	},
+}, { prefix = "<leader>", mode = "v" })
