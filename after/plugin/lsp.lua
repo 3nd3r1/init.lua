@@ -133,7 +133,7 @@ conform.setup({
                 local fp=io.open("$HOME/.robotidy.yaml","r")
                 if fp~=nil then
                     io.close(fp)
-                    return { "--config", "$HOME/.robotidy.yaml", "$FILENAME", "--overwrite" }
+                    return { "--config", "$HOME/.robotidy.toml", "$FILENAME", "--overwrite" }
                 else
                     return { "$FILENAME", "--overwrite" }
                 end
