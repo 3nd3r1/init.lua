@@ -49,6 +49,8 @@ return require("packer").startup(function(use)
 	-- LSP STUFF -----------------------------------------------------------------------------------------------------
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
+
 	use({
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v3.x",
