@@ -93,6 +93,18 @@ require("mason-lspconfig").setup({
 				},
 			})
 		end,
+		gopls = function()
+			require("lspconfig").gopls.setup({
+				settings = {
+					gopls = {
+						analyses = {
+							unusedparams = true,
+						},
+						staticcheck = true,
+					},
+				},
+			})
+		end,
 	},
 })
 
@@ -138,15 +150,31 @@ conform.setup({
 					return { "$FILENAME", "--overwrite" }
 				end
 			end,
-            range_args = function(self, ctx)
+			range_args = function(self, ctx)
 				local fp = io.open(os.getenv("HOME") .. "/.robotidy.toml", "r")
 				if fp ~= nil then
 					io.close(fp)
-                    return { "--startline", ctx.range["start"][1], "--endline", ctx.range["end"][1], "--config", os.getenv("HOME").."/.robotidy.toml",  "$FILENAME", "--overwrite" }
+					return {
+						"--startline",
+						ctx.range["start"][1],
+						"--endline",
+						ctx.range["end"][1],
+						"--config",
+						os.getenv("HOME") .. "/.robotidy.toml",
+						"$FILENAME",
+						"--overwrite",
+					}
 				else
-                    return { "--startline", ctx.range["start"][1], "--endline", ctx.range["end"][1], "$FILENAME", "--overwrite" }
+					return {
+						"--startline",
+						ctx.range["start"][1],
+						"--endline",
+						ctx.range["end"][1],
+						"$FILENAME",
+						"--overwrite",
+					}
 				end
-            end,
+			end,
 			stdin = false,
 		},
 	},
