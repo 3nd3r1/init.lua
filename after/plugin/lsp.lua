@@ -131,6 +131,7 @@ conform.setup({
 		html = { { "prettierd", "prettier" } },
 		yaml = { { "prettierd", "prettier" } },
 		robot = { "robotidy" },
+		go = { "gofmt", "goimports" },
 	},
 	formatters = {
 		dockfmt = {
