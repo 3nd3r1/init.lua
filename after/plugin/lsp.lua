@@ -108,15 +108,6 @@ require("mason-lspconfig").setup({
 	},
 })
 
--- Copilot
-
-vim.keymap.set("i", "<C-Space>", 'copilot#Accept("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false,
-	desc = "Accept Copilot completion",
-})
-vim.g.copilot_no_tab_map = true
-
 -- Formatter
 local conform = require("conform")
 

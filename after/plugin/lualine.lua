@@ -9,6 +9,19 @@ custom_ayu.visual.a.bg = "#800080"
 custom_ayu.visual.b.fg = "#ff8000"
 custom_ayu.normal.c.bg = "#000000"
 
+function CodeiumStatus()
+    return "{…}" .. vim.api.nvim_call_function("codeium#GetStatusString", {})
+end
+
+function CopilotStatus()
+    if vim.api.nvim_call_function("copilot#Enabled", {}) == 0 then
+        return "" .. " OFF"
+    else
+        return "" .. " ON"
+    end
+end
+
+
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
@@ -33,7 +46,7 @@ require("lualine").setup({
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = { "filename" },
 		lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_y = { require("dap").status },
+		lualine_y = { require("dap").status, CopilotStatus, CodeiumStatus},
 		lualine_z = { "location" },
 	},
 	inactive_sections = {
