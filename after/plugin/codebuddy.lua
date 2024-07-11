@@ -55,4 +55,4 @@ require("which-key").register({
 			"Toggle Codeium",
 		},
 	},
-}, { prefix = "<leader>" })
+}, { prefix = "<leader>", silent = true })
