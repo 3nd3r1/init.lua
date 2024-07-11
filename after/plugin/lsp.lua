@@ -17,7 +17,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 
 -- Completions
 local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
 
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
@@ -31,13 +30,23 @@ cmp.setup({
 		["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.select }),
 		["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.select }),
 	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+	}, { { name = "buffer" } }),
+	formatting = {
+		format = require("lspkind").cmp_format({
+			mode = "symbol_text",
+			preset = "codicons",
+			maxwidth = 50,
+			ellipsis_char = "...",
+		}),
+	},
 })
 
 -- LSP
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	client.server_capabilities.semanticTokensProvider = nil
 	require("which-key").register({
 		l = {
 			name = "LSP",
@@ -62,6 +71,12 @@ lsp.on_attach(function(client, bufnr)
 		vim.diagnostic.enable(true)
 	end
 end)
+
+lsp.set_server_config({
+	on_init = function(client)
+		client.server_capabilities.semanticTokensProvider = nil
+	end,
+})
 
 -- Mason
 require("mason").setup({})

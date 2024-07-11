@@ -63,6 +63,7 @@ return require("packer").startup(function(use)
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
 			{ "towolf/vim-helm", ft = "helm" },
+			"hrsh7th/cmp-buffer",
 
 			-- Linting
 			{ "mfussenegger/nvim-lint" },
@@ -72,6 +73,7 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "L3MON4D3/LuaSnip" },
+			"onsails/lspkind.nvim",
 
 			-- formatting
 			"stevearc/conform.nvim",
