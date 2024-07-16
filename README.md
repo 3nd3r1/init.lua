@@ -3,9 +3,8 @@
 ## Installation
 - Packages
     ```
-    sudo add-apt-repository ppa:neovim-ppa/unstable
-    sudo apt-get update
-    sudo apt-get install ripgrep python3 python3.10-venv neovim
+    brew install neovim
+    sudo apt-get install ripgrep python3 python3.10-venv
     ```
 - Install packer
     ```
