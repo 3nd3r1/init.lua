@@ -94,14 +94,14 @@ require("mason-lspconfig").setup({
 			require("lspconfig").helm_ls.setup({
 				settings = {
 					["helm-ls"] = {
-                        valuesFiles = {
-                            mainValuesFile = "values.yaml",
-                            lintOverlayValuesFile = "values.lint.yaml",
-                            additionalValuesFilesGlobPattern = "values.*.yaml",
-                        },
+						valuesFiles = {
+							mainValuesFile = "values.yaml",
+							lintOverlayValuesFile = "values.lint.yaml",
+							additionalValuesFilesGlobPattern = "values.*.yaml",
+						},
 						yamlls = {
-                            enabled = true,
-                            diagnosticsLimit = 50,
+							enabled = true,
+							diagnosticsLimit = 50,
 							path = "yaml-language-server",
 							showDiagnosticsDirectly = false,
 							config = {
@@ -114,6 +114,11 @@ require("mason-lspconfig").setup({
 						},
 					},
 				},
+			})
+		end,
+		yamlls = function()
+			require("lspconfig").yamlls.setup({
+				filetypes = { "yaml", "yaml.ansible" },
 			})
 		end,
 		gopls = function()
