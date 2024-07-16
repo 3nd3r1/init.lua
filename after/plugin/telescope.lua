@@ -1,16 +1,18 @@
 local builtin = require("telescope.builtin")
 
-require("which-key").register({
-	p = {
-		name = "Telescope",
-		f = { builtin.find_files, "Find files" },
-		g = { builtin.git_files, "Find git files" },
-		t = { builtin.treesitter, "Treesitter find" },
-		s = {
-			function()
-				builtin.live_grep({ additional_args = { "--hidden" } })
-			end,
-			"Live grep",
-		},
+require("which-key").add({
+	{
+		"<leader>p",
+		group = "Telescope",
 	},
-}, { prefix = "<leader>" })
+	{ "<leader>pf", builtin.find_files, desc = "Find files" },
+	{ "<leader>pg", builtin.git_files, desc = "Find git files" },
+	{ "<leader>pt", builtin.treesitter, desc = "Treesitter find" },
+	{
+		"<leader>ps",
+		function()
+			builtin.live_grep({ additional_args = { "--hidden" } })
+		end,
+		desc = "Live grep",
+	},
+})

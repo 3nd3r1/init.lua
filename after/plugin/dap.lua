@@ -99,19 +99,18 @@ dap.configurations.go = {
 	},
 }
 
-require("which-key").register({
-	d = {
-		name = "Debug",
-		u = { dapui.toggle, "Toggle dap ui" },
-		b = { dap.toggle_breakpoint, "Toggle breakpoint" },
-		c = { dap.continue, "Continue debugging" },
-		d = { dap.disconnect, "Disconnect from debugee" },
-		i = { dap.set_into, "Step into" },
-		s = {
-			function()
-				dapui.float_element("scopes", { enter = true })
-			end,
-			"Open scopes",
-		},
+require("which-key").add({
+	{ "<leader>d", group = "Debug" },
+	{ "<leader>du", dapui.toggle, desc = "Toggle dap ui" },
+	{ "<leader>db", dap.toggle_breakpoint, desc = "Toggle breakpoint" },
+	{ "<leader>dc", dap.continue, desc = "Continue debugging" },
+	{ "<leader>dd", dap.disconnect, desc = "Disconnect from debugee" },
+	{ "<leader>di", dap.set_into, desc = "Step into" },
+	{
+		"<leader>ds",
+		function()
+			dapui.float_element("scopes", { enter = true })
+		end,
+		desc = "Open scopes",
 	},
-}, { prefix = "<leader>" })
+})

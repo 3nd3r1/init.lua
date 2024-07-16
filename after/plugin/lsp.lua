@@ -47,23 +47,22 @@ cmp.setup({
 lsp.on_attach(function(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	require("which-key").register({
-		l = {
-			name = "LSP",
-			K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover information" },
-			d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to definition" },
-			D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to declaration" },
-			i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to implementation" },
-			o = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Go to type definition" },
-			r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Show references" },
-			s = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
-			["<F2>"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename symbol" },
-			["<F4>"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
-			l = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Show diagnostics" },
-			["]"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Go to previous diagnostic" },
-			["["] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Go to next diagnostic" },
-		},
-	}, { prefix = "<leader>", buffer = bufnr })
+	require("which-key").add({
+		buffer = bufnr,
+		{ "<leader>l", group = "LSP" },
+		{ "<leader>K", "<cmd>lua vim.lsp.buf.hover()<cr>", desc = "Show hover information" },
+		{ "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Go to definition" },
+		{ "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Go to declaration" },
+		{ "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<cr>", desc = "Go to implementation" },
+		{ "<leader>lo", "<cmd>lua vim.lsp.buf.type_definition()<cr>", desc = "Go to type definition" },
+		{ "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "Show references" },
+		{ "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Show signature help" },
+		{ "<leader><F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename symbol" },
+		{ "<leader><F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code action" },
+		{ "<leader>ll", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Show diagnostics" },
+		{ "<leader>]", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Go to previous diagnostic" },
+		{ "<leader[", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Go to next diagnostic" },
+	})
 
 	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
 		vim.diagnostic.enable(false)
@@ -187,24 +186,29 @@ conform.setup({
 	},
 })
 
-require("which-key").register({
-	f = {
-		function()
-			conform.format({
-				lsp_format = "fallback",
-			})
-		end,
-		"Format code",
+require("which-key").add({
+	{
+		mode = "n",
+		{
+			"<leader>f",
+			function()
+				conform.format({
+					lsp_format = "fallback",
+				})
+			end,
+			desc = "Format code",
+		},
 	},
-}, { prefix = "<leader>", mode = "n" })
-
-require("which-key").register({
-	f = {
-		function()
-			conform.format({
-				lsp_format = "fallback",
-			})
-		end,
-		"Format code",
+	{
+		mode = "v",
+		{
+			"<leader>f",
+			function()
+				conform.format({
+					lsp_format = "fallback",
+				})
+			end,
+			desc = "Format code",
+		},
 	},
-}, { prefix = "<leader>", mode = "v" })
+})

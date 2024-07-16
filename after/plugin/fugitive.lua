@@ -1,14 +1,16 @@
-require("which-key").register({
-    g = {
-        name = "Git",
-        s = {
-            function()
-                vim.cmd.Git()
-            end,
-            "Open fugitive",
-        },
-    },
-}, { prefix = "<leader>" })
+require("which-key").add({
+	{
+		"<leader>g",
+		group = "Git",
+	},
+	{
+		"<leader>gs",
+		function()
+			vim.cmd.Git()
+		end,
+		desc = "Open fugitive",
+	},
+})
 
 local Fugitive = vim.api.nvim_create_augroup("Fugitive", {})
 
@@ -22,28 +24,28 @@ autocmd("BufWinEnter", {
 		end
 
 		local bufnr = vim.api.nvim_get_current_buf()
-		require("which-key").register({
-			g = {
-				name = "Git",
-				P = {
-					function()
-						vim.cmd.Git("push")
-					end,
-					"Push",
-				},
-				p = {
-					function()
-						vim.cmd.Git("pull --rebase")
-					end,
-					"Pull rebase",
-				},
-				t = {
-					function()
-						vim.cmd.Git("push -u origin ")
-					end,
-					"Push to origin",
-				},
+		require("which-key").add({
+			{
+				"<leader>gP",
+				function()
+					vim.cmd.Git("push")
+				end,
+				desc = "Push",
 			},
-		}, { prefix = "<leader>", buffer = bufnr })
+			{
+				"<leader>gp",
+				function()
+					vim.cmd.Git("pull --rebase")
+				end,
+				desc = "Pull rebase",
+			},
+			{
+				"<leader>gt",
+				function()
+					vim.cmd.Git("push -u origin ")
+				end,
+				desc = "Push to origin",
+			},
+		})
 	end,
 })

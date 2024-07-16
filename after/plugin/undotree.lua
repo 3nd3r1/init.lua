@@ -1,3 +1,3 @@
-require("which-key").register({
-    u = { vim.cmd.UndotreeToggle, "Toggle undotree" },
-}, { prefix = "<leader>" })
+require("which-key").add({
+	{ "<leader>u", vim.cmd.UndotreeToggle, desc = "Toggle undotree" },
+})

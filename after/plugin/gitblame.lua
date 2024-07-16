@@ -4,9 +4,6 @@ gitblame.setup({
 	enabled = false,
 })
 
-require("which-key").register({
-	g = {
-		name = "Git",
-		b = { gitblame.toggle, "Toggle Git Blame" },
-	},
-}, { prefix = "<leader>" })
+require("which-key").add({
+	{ "<leader>gb", gitblame.toggle, desc = "Toggle Git Blame" },
+})

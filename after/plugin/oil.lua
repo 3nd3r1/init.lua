@@ -1,7 +1,7 @@
 require("oil").setup({
-    view_options = {
-        show_hidden = true,
-    },
+	view_options = {
+		show_hidden = true,
+	},
 })
 
-vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", { desc = "Open Oil" })
+require("which-key").add({ { "<leader>pv", "<CMD>Oil<CR>", desc = "Open Oil" } })
