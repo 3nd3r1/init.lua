@@ -63,12 +63,6 @@ lsp.on_attach(function(client, bufnr)
 		{ "<leader>]", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Go to previous diagnostic" },
 		{ "<leader[", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Go to next diagnostic" },
 	})
-
-	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-		vim.diagnostic.enable(false)
-	else
-		vim.diagnostic.enable(true)
-	end
 end)
 
 lsp.set_server_config({
@@ -100,8 +94,23 @@ require("mason-lspconfig").setup({
 			require("lspconfig").helm_ls.setup({
 				settings = {
 					["helm-ls"] = {
+                        valuesFiles = {
+                            mainValuesFile = "values.yaml",
+                            lintOverlayValuesFile = "values.lint.yaml",
+                            additionalValuesFilesGlobPattern = "values.*.yaml",
+                        },
 						yamlls = {
+                            enabled = true,
+                            diagnosticsLimit = 50,
 							path = "yaml-language-server",
+							showDiagnosticsDirectly = false,
+							config = {
+								schemas = {
+									kubernetes = "templates/**",
+								},
+								completion = true,
+								hover = true,
+							},
 						},
 					},
 				},
