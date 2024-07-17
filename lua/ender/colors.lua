@@ -11,6 +11,7 @@ vim.o.termguicolors = true
 local highlight_groups = {
     Normal = { bg = "none", fg = "#800080" },
     NormalFloat = { bg = "none" },
+    EndOfBuffer = { bg = "none", fg = "none" },
     Pmenu = {fg="#800080", bg="#000000"},
     SignColumn = {bg="#000000"},
     CursorLine = {bg="#000000"},
