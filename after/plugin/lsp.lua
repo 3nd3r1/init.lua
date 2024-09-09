@@ -4,7 +4,7 @@ lsp.preset("recommended")
 
 -- Linting
 require("lint").linters_by_ft = {
-	python = { "pylint", "flake8" },
+	python = { "pylint" },
 	yaml = { "yamllint" },
 }
 require("mason-nvim-lint").setup()
@@ -76,7 +76,7 @@ require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"lua_ls",
-		"pyright",
+		"pylsp",
 		"ts_ls",
 		"html",
 		"yamlls",
