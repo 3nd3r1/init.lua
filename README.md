@@ -3,8 +3,8 @@
 ## Installation
 - Packages
     ```
-    brew install neovim
     sudo apt-get install ripgrep python3 python3.10-venv
+    brew install neovim
     ```
 - Install packer
     ```
