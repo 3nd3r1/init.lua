@@ -147,7 +147,15 @@ require("mason-lspconfig").setup({
         end,
         ts_ls = function()
             require("lspconfig").ts_ls.setup({
-                root_dir = require("lspconfig").util.root_pattern("package.json"),
+                root_dir = function(fname)
+                    local util = require("lspconfig").util
+                    local root = util.root_pattern("package.json")(fname)
+                    -- If there deno.json and package.json, its deno project
+                    if root and not util.path.is_fule(root .. "/deno.json") then
+                        return root
+                    end
+                    return nil
+                end,
                 single_file_support = false,
             })
         end
