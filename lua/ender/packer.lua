@@ -52,6 +52,13 @@ return require("packer").startup(function(use)
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
 
 	use({
+		"folke/trouble.nvim",
+		config = function()
+			require("trouble").setup()
+		end,
+	})
+
+	use({
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v3.x",
 		requires = {

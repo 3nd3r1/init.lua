@@ -10,35 +10,35 @@ custom_ayu.visual.b.fg = "#ff8000"
 custom_ayu.normal.c.bg = "#000000"
 
 function CodeiumStatus()
-    return "{…}" .. vim.api.nvim_call_function("codeium#GetStatusString", {})
+	return "{…}" .. vim.api.nvim_call_function("codeium#GetStatusString", {})
 end
 
 function CopilotStatus()
-    if vim.api.nvim_call_function("copilot#Enabled", {}) == 0 then
-        return "" .. " OFF"
-    else
-        return "" .. " ON"
-    end
+	if vim.api.nvim_call_function("copilot#Enabled", {}) == 0 then
+		return "" .. " OFF"
+	else
+		return "" .. " ON"
+	end
 end
 
 function VirtualEnv()
-  if vim.bo.filetype ~= 'python' then
-    return ""
-  end
+	if vim.bo.filetype ~= "python" then
+		return ""
+	end
 
-  local conda_env = os.getenv('CONDA_DEFAULT_ENV')
-  local venv_path = os.getenv('VIRTUAL_ENV')
+	local conda_env = os.getenv("CONDA_DEFAULT_ENV")
+	local venv_path = os.getenv("VIRTUAL_ENV")
 
-  if venv_path == nil then
-    if conda_env == nil then
-      return ""
-    else
-      return string.format("%s (conda)", conda_env)
-    end
-  else
-    local venv_name = vim.fn.fnamemodify(venv_path, ':t')
-    return string.format("%s (venv)", venv_name)
-  end
+	if venv_path == nil then
+		if conda_env == nil then
+			return ""
+		else
+			return string.format("%s (conda)", conda_env)
+		end
+	else
+		local venv_name = vim.fn.fnamemodify(venv_path, ":t")
+		return string.format("%s (venv)", venv_name)
+	end
 end
 
 require("lualine").setup({
@@ -65,7 +65,7 @@ require("lualine").setup({
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = { "filename" },
 		lualine_x = { "encoding", "fileformat", "filetype", VirtualEnv },
-		lualine_y = { require("dap").status, CopilotStatus, CodeiumStatus},
+		lualine_y = { require("dap").status, CopilotStatus, CodeiumStatus },
 		lualine_z = { "location" },
 	},
 	inactive_sections = {
