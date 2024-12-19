@@ -4,7 +4,7 @@
 - Packages
     ```
     sudo apt-get install ripgrep python3 python3.10-venv
-    brew install neovim
+    nix-env -i neovim
     ```
 - Install packer
     ```
