@@ -89,7 +89,7 @@ return require("packer").startup(function(use)
 			"github/copilot.vim",
 
 			-- codium
-			{ "Exafunction/codeium.vim", tag = "1.8.66" },
+			{ "Exafunction/windsurf.vim"},
 		},
 	})
 end)
