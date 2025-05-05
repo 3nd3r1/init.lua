@@ -2,6 +2,8 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
+vim.diagnostic.config({ virtual_text = true })
+
 -- Linting
 require("lint").linters_by_ft = {
     python = { "pylint" },
