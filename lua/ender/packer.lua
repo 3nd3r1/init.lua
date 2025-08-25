@@ -59,8 +59,8 @@ return require("packer").startup(function(use)
 	})
 
 	-- Core LSP plugins (no more lsp-zero!)
-	use("williamboman/mason.nvim")
-	use("williamboman/mason-lspconfig.nvim")
+	use("mason-org/mason.nvim")
+	use("mason-org/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
 	use({ "towolf/vim-helm", ft = "helm" })
 
