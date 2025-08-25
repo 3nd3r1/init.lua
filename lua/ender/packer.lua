@@ -46,11 +46,11 @@ return require("packer").startup(function(use)
 
 	use("folke/which-key.nvim")
 
+	use("OXY2DEV/markview.nvim")
+
 	-- LSP STUFF -----------------------------------------------------------------------------------------------------
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
-
 	use({
 		"folke/trouble.nvim",
 		config = function()
@@ -58,38 +58,27 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v3.x",
-		requires = {
-			--- Uncomment the two plugins below if you want to manage the language servers from neovim
-			--- and read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
+	-- Core LSP plugins (no more lsp-zero!)
+	use("williamboman/mason.nvim")
+	use("williamboman/mason-lspconfig.nvim")
+	use("neovim/nvim-lspconfig")
+	use({ "towolf/vim-helm", ft = "helm" })
 
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			{ "towolf/vim-helm", ft = "helm" },
-			"hrsh7th/cmp-buffer",
+	-- Autocompletion
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-buffer")
+	use("L3MON4D3/LuaSnip")
+	use("onsails/lspkind.nvim")
 
-			-- Linting
-			{ "mfussenegger/nvim-lint" },
-			{ "rshkarin/mason-nvim-lint" },
+	-- Linting
+	use("mfussenegger/nvim-lint")
+	use("rshkarin/mason-nvim-lint")
 
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "L3MON4D3/LuaSnip" },
-			"onsails/lspkind.nvim",
+	-- Formatting
+	use("stevearc/conform.nvim")
 
-			-- formatting
-			"stevearc/conform.nvim",
-
-			-- copilot
-			"github/copilot.vim",
-
-			-- codium
-			{ "Exafunction/windsurf.vim"},
-		},
-	})
+	-- AI assistance
+	use("github/copilot.vim")
+	use("Exafunction/windsurf.vim")
 end)
