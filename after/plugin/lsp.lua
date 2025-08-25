@@ -2,10 +2,18 @@ require("mason").setup({})
 
 vim.diagnostic.config({ virtual_text = true })
 
-vim.lsp.config("*", {
-	on_attach = function(client, bufnr)
-		client.server_capabilities.semanticTokensProvider = nil
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		local bufnr = ev.buf
 
+		-- Disable semantic tokens
+		if client then
+			client.server_capabilities.semanticTokensProvider = nil
+		end
+
+		-- Setup which-key LSP mappings
 		require("which-key").add({
 			buffer = bufnr,
 			{ "<leader>l", group = "LSP" },
