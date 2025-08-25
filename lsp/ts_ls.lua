@@ -1,4 +1,5 @@
 return {
+	root_markers = { "package.json" },
 	root_dir = function(fname)
 		local util = require("lspconfig").util
 		local root = util.root_pattern("package.json")(fname)
