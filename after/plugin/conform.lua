@@ -17,6 +17,7 @@ conform.setup({
 		go = { "gofmt", "goimports" },
 		markdown = { "prettierd", "prettier", stop_after_first = true },
 		json = { "prettierd", "prettier", stop_after_first = true },
+		bash = { "beautysh" },
 	},
 	formatters = {
 		dockfmt = {
