@@ -41,6 +41,5 @@ require("mason-lspconfig").setup({
 		"helm_ls",
 		"bashls",
 		"gopls",
-		"groovyls",
 	},
 })
