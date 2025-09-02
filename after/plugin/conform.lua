@@ -19,6 +19,7 @@ conform.setup({
 		json = { "prettierd", "prettier", stop_after_first = true },
 		bash = { "beautysh" },
 		sh = { "beautysh" },
+        nix = { "nixfmt" },
 	},
 	formatters = {
 		dockfmt = {
