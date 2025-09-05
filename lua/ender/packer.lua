@@ -48,6 +48,12 @@ return require("packer").startup(function(use)
 
 	use("OXY2DEV/markview.nvim")
 
+    use({"norcalli/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup()
+        end,
+    })
+
 	-- LSP STUFF -----------------------------------------------------------------------------------------------------
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } })
